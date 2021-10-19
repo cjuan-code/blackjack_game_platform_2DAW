@@ -102,24 +102,6 @@ html, body {
     position: absolute;
 }
 
-.player1Draw {
-    animation: player1Draw 1s ease-in;
-    animation-fill-mode: forwards;
-}
-
-@keyframes player1Draw {
-    0% {
-        transform: translateY(0) translateX(0) rotate(0deg);
-    }
-
-    75% {
-        transform: translateY(200%) translateX(400%) rotate(360deg) rotate(0deg);
-    }
-
-    100% {
-        transform: translateY(200%) translateX(400%) rotateY(180deg);
-    }
-}
 
 .flip-card {
     width: 100%;
@@ -157,6 +139,42 @@ html, body {
     height: 100%;
 }
 
-/* .card:hover {
-    transform: rotateY(-280deg); 
-} */
+
+/* Animations */
+.player1Draw {
+    animation: player1Draw 1s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes player1Draw {
+    0% {
+        transform: translateY(0) translateX(0) rotate(0deg);
+    }
+
+    75% {
+        transform: translateY(200%) translateX(400%) rotate(360deg) rotate(0deg);
+    }
+
+    100% {
+        transform: translateY(200%) translateX(400%) rotateY(180deg);
+    }
+}
+
+.crupierDraw {
+    animation: crupierDraw 1s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes crupierDraw {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    75% {
+        transform: translateX(400%) rotate(360deg) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(400%) rotateY(180deg);
+    }
+}
