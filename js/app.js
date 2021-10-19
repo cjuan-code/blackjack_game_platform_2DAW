@@ -1,10 +1,4 @@
 function player1Draw() {
-    // let elem = document.getElementById('card');
+    let elem = document.getElementById('card1');
     elem.classList.add('player1Draw');
 }
-
-var elem = document.getElementById('card1');
-elem.addEventListener('click', e => {
-    let elem2 = document.getElementById('card1_flip');
-    elem2.classList.add('flipp');
-})
