@@ -5,6 +5,24 @@ html, body {
     background-image: url(../img/wood_texture.jpg);
 }
 
+.hidden {
+    display: none;
+}
+
+#start {
+    position: absolute;
+    display: grid;
+    align-items: center;
+    height: 100%;
+    width: 100%;
+}
+
+#start button {
+    width: 5%;
+    height: 5%;
+    margin: 0 auto;
+}
+
 .gameboard {
     background-image: url(../img/board.jpg);
     background-repeat: no-repeat;
@@ -58,43 +76,7 @@ html, body {
         25px 25px 15px rgba(0,0,0,.3);
 }
 
-.card {
-    height: 100%;
-    width: 100%;
-    position: absolute;
-}
-
-.card .front {
-    height: 100%;
-    width: 100%;
-    border-radius: 4%;
-    position: absolute;
-    background-color: red;
-    z-index: 2;
-}
-
-.card .back {
-    height: 100%;
-    width: 100%;
-    border-radius: 4%;
-    position: absolute;
-    z-index: 1;
-}
-
-.card .back img {
-    height: 100%;
-    width: 100%;
-    border-radius: 4%;
-}
-
-/* #deck .card .front {
-    height: 60%;
-    width: 60%;
-    border-radius: 4%;
-    background-color: red;
-} */
-
-#deck img:nth-child(2) {
+#deck img {
     height: 100%;
     width: 100%;
     border-radius: 4%;
@@ -132,7 +114,7 @@ html, body {
     background-size: cover;
 }
 
-.flip-card-front img {
+.flip-card-front img, .flip-card-back img {
     width: 100%;
     height: 100%;
 }
@@ -150,11 +132,11 @@ html, body {
     }
 
     75% {
-        transform: translateY(200%) translateX(400%) rotate(360deg) rotate(0deg);
+        transform: translateY(var(--tY, 200%)) translateX(var(--tX, 400%)) rotate(360deg) rotate(0deg);
     }
 
     100% {
-        transform: translateY(200%) translateX(400%) rotateY(180deg);
+        transform: translateY(var(--tY, 200%)) translateX(var(--tX, 400%)) rotateY(180deg);
     }
 }
 

@@ -8,30 +8,18 @@
     <title>Blackjack</title>
 </head>
 <body>
+
+    <!-- <div id="start" class="hidden">
+        <button class="hidden">PLAY</button>
+    </div> -->
+
     <main id="gameboard" class="gameboard">
         <div id="deck">
-            <!-- <div id="card" class="card">
-                <div class="front">
-                    <img id="deck_img" src="https://images.freeimages.com/images/premium/previews/1760/17608565-playing-card-back-side-62x90-mm.jpg" alt="#">
-                </div>
-                <div class="back">
-                    <img id="back" src="https://images.freeimages.com/images/premium/previews/1760/17608565-playing-card-back-side-62x90-mm.jpg">
-                </div>
-            </div> -->
-            <div id="card1" class="flip-card">
-                <div id="card1_flip" class="flip-card-inner">
-                  <div class="flip-card-front">
-                    <img src="https://images.freeimages.com/images/premium/previews/1760/17608565-playing-card-back-side-62x90-mm.jpg">
-                  </div>
-                  <div class="flip-card-back">
-                  </div>
-                </div>
-            </div>
             <img id="deck2_img" src="https://images.freeimages.com/images/premium/previews/1760/17608565-playing-card-back-side-62x90-mm.jpg" alt="#">
         </div>
     </main>
-    <div id="buttons" class="">
-        <button onclick="player1Draw()">Hit</button>
+    <div id="buttons">
+        <button onclick="createCard()">Hit</button>
         <button>Stand</button>
     </div>
     <script src="js/app.js"></script>
