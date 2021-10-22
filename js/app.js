@@ -1,10 +1,4 @@
-function player1Draw() {
-    let elem = document.getElementById('card1');
-    elem.classList.add('player1Draw');
-    document.querySelector('.player1Draw').style.setProperty('--tX', '400%')
-}
-
-function createCard() {
+function createCard(type) {
 
     let new_card = generateCard();
     let main_container = document.createElement('div');
@@ -28,12 +22,24 @@ function createCard() {
     front.appendChild(front_img);
     back.appendChild(back_img);
 
-    main_container.classList.add('player1Draw');
-    main_container.style.setProperty('--tX', tX + "%");
-    console.log(deck.length);
-    tX = tX+25;
+    if (type == 'p1') {
+        main_container.classList.add('drawPlayer1');
+        main_container.style.setProperty('--tXp1', tXp1 + "%");
+        tXp1 = tXp1+25;
+        p1value = p1value + new_card.value;
+        ccp1++;
+    } else if (type == 'crupier') {
 
-    value = value + new_card.value;
+        if (ccc == 1) {
+            main_container.classList.add('drawCrupierUnder');
+        } else {
+            main_container.classList.add('drawCrupier');
+        }
+        main_container.style.setProperty('--tXc', tXc + "%");
+        tXc = tXc+25;
+        cvalue = cvalue + new_card.value;
+        ccc++;
+    }
 }
 
 function generateCard() {
@@ -50,11 +56,11 @@ var deck = [
     {card: "hearts/AH.png", value: 10}, {card: "hearts/2H.png", value: 2}, {card: "hearts/3H.png", value: 3}, {card: "hearts/4H.png", value: 4}, {card: "hearts/5H.png", value: 5}, {card: "hearts/6H.png", value: 6}, {card: "hearts/7H.png", value: 7}, {card: "hearts/8H.png", value: 8}, {card: "hearts/9H.png", value: 9}, {card: "hearts/0H.png", value: 10}, {card: "hearts/JH.png", value: 10}, {card: "hearts/QH.png", value: 10}, {card: "hearts/KH.png", value: 10},
     {card: "spades/AS.png", value: 10}, {card: "spades/2S.png", value: 2}, {card: "spades/3S.png", value: 3}, {card: "spades/4S.png", value: 4}, {card: "spades/5S.png", value: 5}, {card: "spades/6S.png", value: 6}, {card: "spades/7S.png", value: 7}, {card: "spades/8S.png", value: 8}, {card: "spades/9S.png", value: 9}, {card: "spades/0S.png", value: 10}, {card: "spades/JS.png", value: 10}, {card: "spades/QS.png", value: 10}, {card: "spades/KS.png", value: 10},
 ];
+
 var deck_div = document.getElementById('deck');
-var value = 0;
-var tX = 25;
-
-createCard();
-// let cardd = document.getElementById("cardf");
-
-// cardd.src = "img/deck/" + random_card;
+var cvalue = 0;
+var p1value = 0;
+var tXp1 = 400;
+var tXc = 400;
+var ccc = 0;
+var ccp1 = 0;
