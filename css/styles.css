@@ -121,40 +121,58 @@ html, body {
 
 
 /* Animations */
-.player1Draw {
-    animation: player1Draw 1s ease-in;
+.drawPlayer1 {
+    animation: drawPlayer1 1s ease-in;
     animation-fill-mode: forwards;
 }
 
-@keyframes player1Draw {
+@keyframes drawPlayer1 {
     0% {
         transform: translateY(0) translateX(0) rotate(0deg);
     }
 
     75% {
-        transform: translateY(var(--tY, 200%)) translateX(var(--tX, 400%)) rotate(360deg) rotate(0deg);
+        transform: translateY(var(--tYp1, 200%)) translateX(var(--tXp1, 400%)) rotate(360deg) rotate(0deg);
     }
 
     100% {
-        transform: translateY(var(--tY, 200%)) translateX(var(--tX, 400%)) rotateY(180deg);
+        transform: translateY(var(--tYp1, 200%)) translateX(var(--tXp1, 400%)) rotateY(180deg);
     }
 }
 
-.crupierDraw {
-    animation: crupierDraw 1s ease-in;
+.drawCrupier {
+    animation: drawCrupier 1s ease-in;
     animation-fill-mode: forwards;
 }
 
-@keyframes crupierDraw {
+@keyframes drawCrupier {
     0% {
         transform: translateX(0) rotate(0deg);
     }
 
     75% {
-        transform: translateX(400%) rotate(360deg) rotate(0deg);
+        transform: translateX(var(--tXc, 400%)) rotate(360deg) rotate(0deg);
     }
 
     100% {
-        transform: translateX(400%) rotateY(180deg);
+        transform: translateX(var(--tXc, 400%)) rotateY(180deg);
+    }
+}
+.drawCrupierUnder {
+    animation: drawCrupierUnder 1s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes drawCrupierUnder {
+    0% {
+        transform: translateX(0) rotate(0deg);
+    }
+
+    75% {
+        transform: translateX(var(--tXc, 400%)) rotate(360deg) rotate(0deg);
+    }
+
+    100% {
+        transform: translateX(var(--tXc, 400%)) rotate(360deg) rotateY(0);
     }
 }
