@@ -13,7 +13,7 @@ function generateGame() {
         }
 
         count++;
-    }, 1500);
+    }, 1600);
 }
 
 function createCard(type) {
@@ -67,7 +67,7 @@ function createCard(type) {
 
 function generateCard() {
 
-    let rand = Math.ceil(Math.random() * ((deck.length+1) - 0) + 0);
+    let rand = Math.ceil(Math.random() * ((deck.length-1) - 0) + 0);
     let random_card = deck[rand];
     deck.splice(deck.indexOf(random_card), 1);
     return random_card;
