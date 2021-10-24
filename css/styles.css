@@ -119,7 +119,6 @@ html, body {
     height: 100%;
 }
 
-
 /* Animations */
 .drawPlayer1 {
     animation: drawPlayer1 1s ease-in;
@@ -132,7 +131,7 @@ html, body {
     }
 
     75% {
-        transform: translateY(var(--tYp1, 200%)) translateX(var(--tXp1, 400%)) rotate(360deg) rotate(0deg);
+        transform: translateY(var(--tYp1, 200%)) translateX(var(--tXp1, 400%)) rotate(360deg);
     }
 
     100% {
@@ -151,7 +150,7 @@ html, body {
     }
 
     75% {
-        transform: translateX(var(--tXc, 400%)) rotate(360deg) rotate(0deg);
+        transform: translateX(var(--tXc, 400%)) rotate(360deg);
     }
 
     100% {
@@ -169,10 +168,25 @@ html, body {
     }
 
     75% {
-        transform: translateX(var(--tXc, 400%)) rotate(360deg) rotate(0deg);
+        transform: translateX(var(--tXc, 400%)) rotate(360deg);
     }
 
     100% {
-        transform: translateX(var(--tXc, 400%)) rotate(360deg) rotateY(0);
+        transform: translateX(var(--tXc, 400%)) rotate(360deg) rotateY(var(--rYc, 0deg));
+    }
+}
+
+.flipCrupierUnder {
+    animation: flipCrupierUnder 0.5s ease-in;
+    animation-fill-mode: forwards;
+}
+
+@keyframes flipCrupierUnder {
+    0% {
+        transform: translateX(var(--tXc, 400%)) rotate(360deg) rotateY(0deg);
+    }
+
+    100% {
+        transform: translateX(var(--tXc, 400%)) rotate(360deg) rotateY(180deg);
     }
 }
