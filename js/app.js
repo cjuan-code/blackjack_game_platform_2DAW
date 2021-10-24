@@ -1,3 +1,21 @@
+function generateGame() {
+    var setGame = setInterval(function() {
+
+        if (count == 0) {
+            createCard('p1');
+        } else if (count == 1) {
+            createCard('crupier');
+        } else if (count == 2) {
+            createCard('p1');
+        } else if (count == 3) {
+            createCard('crupier');
+            clearInterval(setGame);
+        }
+
+        count++;
+    }, 1500);
+}
+
 function createCard(type) {
 
     let new_card = generateCard();
@@ -27,19 +45,24 @@ function createCard(type) {
         main_container.style.setProperty('--tXp1', tXp1 + "%");
         tXp1 = tXp1+25;
         p1value = p1value + new_card.value;
+
         ccp1++;
+
     } else if (type == 'crupier') {
 
         if (ccc == 1) {
             main_container.classList.add('drawCrupierUnder');
+            main_container.setAttribute('id', 'downC');
         } else {
             main_container.classList.add('drawCrupier');
         }
+
         main_container.style.setProperty('--tXc', tXc + "%");
         tXc = tXc+25;
         cvalue = cvalue + new_card.value;
         ccc++;
     }
+
 }
 
 function generateCard() {
@@ -50,6 +73,12 @@ function generateCard() {
     return random_card;
 }
 
+function stand() {
+    let elem = document.getElementById('downC');
+    elem.classList.add('flipCrupierUnder');
+    canHit = false;
+}
+
 var deck = [
     {card: "clubs/AC.png", value: [1, 11]}, {card: "clubs/2C.png", value: 2}, {card: "clubs/3C.png", value: 3}, {card: "clubs/4C.png", value: 4}, {card: "clubs/5C.png", value: 5}, {card: "clubs/6C.png", value: 6}, {card: "clubs/7C.png", value: 7}, {card: "clubs/8C.png", value: 8}, {card: "clubs/9C.png", value: 9}, {card: "clubs/0C.png", value: 10}, {card: "clubs/JC.png", value: 10}, {card: "clubs/QC.png", value: 10}, {card: "clubs/KC.png", value: 10},
     {card: "diamonds/AD.png", value: [1, 11]}, {card: "diamonds/2D.png", value: 2}, {card: "diamonds/3D.png", value: 3}, {card: "diamonds/4D.png", value: 4}, {card: "diamonds/5D.png", value: 5}, {card: "diamonds/6D.png", value: 6}, {card: "diamonds/7D.png", value: 7}, {card: "diamonds/8D.png", value: 8}, {card: "diamonds/9D.png", value: 9}, {card: "diamonds/0D.png", value: 10}, {card: "diamonds/JD.png", value: 10}, {card: "diamonds/QD.png", value: 10}, {card: "diamonds/KD.png", value: 10},
@@ -58,9 +87,26 @@ var deck = [
 ];
 
 var deck_div = document.getElementById('deck');
+var hitButton = document.getElementById('hit');
+var standButton = document.getElementById('stand');
 var cvalue = 0;
 var p1value = 0;
 var tXp1 = 400;
 var tXc = 400;
 var ccc = 0;
 var ccp1 = 0;
+var count = 0;
+var canHit = true;
+
+
+hitButton.addEventListener('click', () => {
+    if (canHit) {
+        createCard('p1');
+    }
+})
+
+standButton.addEventListener('click', () => {
+    stand();
+})
+
+generateGame();
