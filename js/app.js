@@ -10,6 +10,7 @@ function generateGame() {
         } else if (count == 3) {
             createCard('crupier');
             clearInterval(setGame);
+            canHit = true;
         }
 
         count++;
@@ -66,7 +67,6 @@ function createCard(type) {
 }
 
 function generateCard() {
-
     let rand = Math.ceil(Math.random() * ((deck.length-1) - 0) + 0);
     let random_card = deck[rand];
     deck.splice(deck.indexOf(random_card), 1);
@@ -96,7 +96,7 @@ var tXc = 400;
 var ccc = 0;
 var ccp1 = 0;
 var count = 0;
-var canHit = true;
+var canHit = false;
 
 
 hitButton.addEventListener('click', () => {
