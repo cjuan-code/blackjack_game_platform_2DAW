@@ -1,4 +1,9 @@
 function generateGame() {
+
+    start_div.classList.add('hidden');
+    deck_div.classList.remove('hidden');
+    buttons_div.classList.remove('hidden');
+
     var setGame = setInterval(function() {
 
         if (count == 0) {
@@ -86,7 +91,10 @@ var deck = [
     {card: "spades/AS.png", value: [1, 11]}, {card: "spades/2S.png", value: 2}, {card: "spades/3S.png", value: 3}, {card: "spades/4S.png", value: 4}, {card: "spades/5S.png", value: 5}, {card: "spades/6S.png", value: 6}, {card: "spades/7S.png", value: 7}, {card: "spades/8S.png", value: 8}, {card: "spades/9S.png", value: 9}, {card: "spades/0S.png", value: 10}, {card: "spades/JS.png", value: 10}, {card: "spades/QS.png", value: 10}, {card: "spades/KS.png", value: 10},
 ];
 
+var start_div = document.getElementById('start');
 var deck_div = document.getElementById('deck');
+var buttons_div = document.getElementById('buttons');
+var play = document.getElementById('play');
 var hitButton = document.getElementById('hit');
 var standButton = document.getElementById('stand');
 var cvalue = 0;
@@ -109,4 +117,6 @@ standButton.addEventListener('click', () => {
     stand();
 })
 
-generateGame();
+play.addEventListener('click', () => {
+    generateGame();
+})
