@@ -9,6 +9,21 @@ html, body {
     visibility: hidden;
 }
 
+.score {
+    display: grid;
+    color: white;
+    font-weight: bolder;
+    grid-template-rows: 1fr 1fr;
+    height: 30%;
+    margin-top: 3%;
+    text-align: center;
+    width: 100%;
+}
+
+.score .p1score {
+    align-content: flex-end;
+}
+
 #start {
     position: absolute;
     display: grid;
