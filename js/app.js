@@ -28,6 +28,17 @@ function generateGame() {
     }, 1600);
 }
 
+function playCrupier() {
+    let playCrupier = setInterval(function() {
+        if (cvalue <= 16) {
+            createCard('crupier');
+        } else if (cvalue >= 17) {
+            clearInterval(playCrupier);
+        }
+
+    }, 1600);
+}
+
 function createCard(type) {
 
     let new_card = generateCard();
@@ -91,6 +102,7 @@ function stand() {
     canHit = false;
     standed = true;
     calculateValue('crupier');
+    playCrupier();
 }
 
 function calculateValue(type) {
@@ -201,7 +213,9 @@ hitButton.addEventListener('click', () => {
 })
 
 standButton.addEventListener('click', () => {
-    stand();
+    setTimeout(() => {
+        stand();
+    }, 1500);
 })
 
 play.addEventListener('click', () => {
