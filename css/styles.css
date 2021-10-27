@@ -13,15 +13,19 @@ html, body {
     display: grid;
     color: white;
     font-weight: bolder;
-    grid-template-rows: 1fr 1fr;
+    grid-template-rows: 0.75fr 1fr 0.75fr;
     height: 30%;
-    margin-top: 3%;
+    margin-top: 2%;
     text-align: center;
     width: 100%;
 }
 
 .score .p1score {
     align-content: flex-end;
+}
+
+.score .winner{
+    font-size: x-large;
 }
 
 #start {

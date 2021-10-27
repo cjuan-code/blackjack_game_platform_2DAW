@@ -30,10 +30,11 @@ function generateGame() {
 
 function playCrupier() {
     let playCrupier = setInterval(function() {
-        if (cvalue <= 16) {
+        if (crupierPoints <= 16) {
             createCard('crupier');
-        } else if (cvalue >= 17) {
+        } else if (crupierPoints >= 17) {
             clearInterval(playCrupier);
+            whoWins();
         }
 
     }, 1600);
@@ -69,7 +70,7 @@ function createCard(type) {
         tXp1 = tXp1+25;
         p1_deck.push(new_card);
 
-        calculateValue('p1');
+        calculatePoints('p1');
 
     } else if (type == 'crupier') {
 
@@ -84,7 +85,7 @@ function createCard(type) {
         tXc = tXc+25;
         crupier_deck.push(new_card);
 
-        calculateValue('crupier');
+        calculatePoints('crupier');
     }
 
 }
@@ -99,20 +100,19 @@ function generateCard() {
 function stand() {
     let elem = document.getElementById('downC');
     elem.classList.add('flipCrupierUnder');
-    canHit = false;
     standed = true;
-    calculateValue('crupier');
+    calculatePoints('crupier');
     playCrupier();
 }
 
-function calculateValue(type) {
+function calculatePoints(type) {
     if (type == 'p1') {
         p1_deck.forEach(element => {
 
             if (count_values == 0) {
-                p1value = element.value;
+                p1Points = element.value;
             } else {
-                p1value = p1value + element.value;
+                p1Points = p1Points + element.value;
             }
 
             if (element.type == 'AS') {
@@ -123,29 +123,29 @@ function calculateValue(type) {
             count_values++;
         });
 
-        if (p1HasAs && p1value > 21) {
-            p1value = p1value-(p1CountAs*10);
+        if (p1HasAs && p1Points > 21) {
+            p1Points = p1Points-(p1CountAs*10);
         }
 
-        if (p1value > 21) {
+        if (p1Points > 21) {
             canHit = false;
 
             setTimeout(() => {
                 stand();
-            }, 1500);
+            }, 400);
 
             console.log('p1 se ha pasado de 21');
         }
 
         p1CountAs = 0;
-        p1score.innerText = p1value; 
+        p1score.innerText = p1Points; 
 
     } else if (type == 'crupier') {
         crupier_deck.forEach(element => {
             if (count_values == 0) {
-                cvalue = element.value;
+                crupierPoints = element.value;
             } else {
-                cvalue = cvalue + element.value;
+                crupierPoints = crupierPoints + element.value;
             }
 
             if (element.type == 'AS') {
@@ -156,22 +156,40 @@ function calculateValue(type) {
             count_values++;
         });
 
-        if (crupierHasAs && cvalue > 21) {
-            cvalue = cvalue-(crupierCountAs*10);
+        if (crupierHasAs && crupierPoints > 21) {
+            crupierPoints = crupierPoints-(crupierCountAs*10);
         }
 
-        if (cvalue > 21) {
+        if (crupierPoints > 21) {
             console.log('sa pasao la maquinita');
         }
 
         crupierCountAs = 0;
         if (crupier_deck.length == 1 || standed) {
-            crupierscore.innerText = cvalue;
+            crupierscore.innerText = crupierPoints;
         }
     }
 
     count_values = 0;
 }
+
+function whoWins() {
+
+    if (crupierPoints > 21 && p1Points <= 21) {
+        winner.innerText = "Player wins";
+    } else if (p1Points > 21 && crupierPoints <= 21) {
+        winner.innerText = "Crupier wins";
+    } else if (crupierPoints > 21 && crupierPoints > 21) {
+        winner.innerText = "Tie";
+    } else if (crupierPoints > p1Points) {
+        winner.innerText = "Crupier wins";
+    } else if (crupierPoints < p1Points) {
+        winner.innerText = "Player wins";
+    } else if (crupierPoints == p1Points) {
+        winner.innerText = "Tie";
+    }
+}
+
 
 var deck = [
     {card: "clubs/AC.png", value: 11, type: 'AS'}, {card: "clubs/2C.png", value: 2}, {card: "clubs/3C.png", value: 3}, {card: "clubs/4C.png", value: 4}, {card: "clubs/5C.png", value: 5}, {card: "clubs/6C.png", value: 6}, {card: "clubs/7C.png", value: 7}, {card: "clubs/8C.png", value: 8}, {card: "clubs/9C.png", value: 9}, {card: "clubs/0C.png", value: 10}, {card: "clubs/JC.png", value: 10}, {card: "clubs/QC.png", value: 10}, {card: "clubs/KC.png", value: 10},
@@ -188,12 +206,13 @@ var buttons_div = document.getElementById('buttons');
 var score_div = document.getElementById('score');
 var crupierscore = document.getElementById('crupierscore');
 var p1score = document.getElementById('p1score');
+var winner = document.getElementById('winner');
 var play = document.getElementById('play');
 var hitButton = document.getElementById('hit');
 var standButton = document.getElementById('stand');
 var crupier_bj_button = document.getElementById('bj');
-var cvalue = 0;
-var p1value = 0;
+var crupierPoints = 0;
+var p1Points = 0;
 var tXp1 = 425;
 var tXc = 425;
 var count = 0;
@@ -205,7 +224,6 @@ var p1HasAs = false;
 var crupierHasAs = false;
 var standed = false;
 
-
 hitButton.addEventListener('click', () => {
     if (canHit) {
         createCard('p1');
@@ -213,9 +231,14 @@ hitButton.addEventListener('click', () => {
 })
 
 standButton.addEventListener('click', () => {
-    setTimeout(() => {
-        stand();
-    }, 1500);
+
+    if (canHit) {
+        canHit = false;
+        setTimeout(() => {
+            stand();
+        }, 400);
+    }
+    
 })
 
 play.addEventListener('click', () => {
