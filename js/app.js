@@ -44,23 +44,25 @@ function createCard(type) {
 
     let new_card = generateCard();
     let main_container = document.createElement('div');
-    let second_container = document.createElement('div');
+    // let second_container = document.createElement('div');
     let front = document.createElement('div');
     let front_img = document.createElement('img');
     let back = document.createElement('div');
     let back_img = document.createElement('img');
 
     main_container.classList.add('flip-card');
-    second_container.classList.add('flip-card-inner');
+    // second_container.classList.add('flip-card-inner');
     front.classList.add('flip-card-front');
     front_img.src = "https://images.freeimages.com/images/premium/previews/1760/17608565-playing-card-back-side-62x90-mm.jpg";
     back.classList.add('flip-card-back');
     back_img.src = "img/deck/" + new_card.card;
 
     deck_div.appendChild(main_container);
-    main_container.appendChild(second_container);
-    second_container.appendChild(front);
-    second_container.appendChild(back);
+    // main_container.appendChild(second_container);
+    // second_container.appendChild(front);
+    // second_container.appendChild(back);
+    main_container.appendChild(front);
+    main_container.appendChild(back);
     front.appendChild(front_img);
     back.appendChild(back_img);
 
@@ -132,7 +134,7 @@ function calculatePoints(type) {
 
             setTimeout(() => {
                 stand();
-            }, 400);
+            }, 1000);
 
             console.log('p1 se ha pasado de 21');
         }
@@ -236,7 +238,7 @@ standButton.addEventListener('click', () => {
         canHit = false;
         setTimeout(() => {
             stand();
-        }, 400);
+        }, 1000);
     }
     
 })
