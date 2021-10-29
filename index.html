@@ -10,8 +10,51 @@
 </head>
 <body>
 
+    <div id="modal-container" class="modal-container">
+        <div id="modal" class="modal">
+            <h1>Rules</h1>
+            <hr/>
+            <a id="closeRules" class="close hidden" title="close">X</a>
+            <div id="rules" class="rules">
+                <strong>Rounds:</strong>
+                <ul>
+                    <li><strong>Bet round</strong>: in this round, player bets an amount of coins.</li>
+                    <li>
+                        <strong>Drawing round</strong>: in this round, cards are drawed. Player gets 2 cards which are visible, crupier gets 2 cards too, but the second one is not visible. There can be different situations: 
+                        <ul>
+                            <li>If crupier's first card is an AS, player can bet that crupier has Blackjack, so player can refund an amount of coins that has been bet.</li>
+                            <li>
+                                In case that is not an AS:
+                                <ul>
+                                    <li>Hit: it draws a card to player.</li>
+                                    <li>Stand: if player thinks that has enought points to win, player can stand and pass the turn to crupier.</li>
+                                </ul>
+                            </li>
+                        </ul>
+                    </li>
+                </ul>
+                <strong>Scoring:</strong>
+                <ul>
+                    <li><strong>AS</strong>: equals 1 or 11 points.</li>
+                    <li><strong>Jack, Queen, King</strong>: equals 10 points.</li>
+                    <li>Other cards values equals to its number.</li>
+                </ul>
+                <br/>
+                <strong>Winning prices:</strong>
+                <ul>
+                    <li>If player has more points than crupier. Winning is multiplied by 1.</li>
+                    <li>If player get Blackjack (21 points when drawing). Winning is multipied by 1.5</li>
+                    <li>If player has less points than crupier. Bet amount is lost.</li>
+                </ul>
+                <p>Anyway, when player wins, refunds bet quantity plus winnings</p>
+            </div>
+        </div>
+        
+    </div>
+    
     <div id="start">
         <button id="play">PLAY</button>
+        <button id="showRules">RULES</button>
     </div>
 
     <main id="gameboard" class="gameboard">

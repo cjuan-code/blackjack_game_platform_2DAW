@@ -4,6 +4,7 @@ function generateGame() {
     deck_div.classList.remove('hidden');
     buttons_div.classList.remove('hidden');
     score_div.classList.remove('hidden');
+    modal_container_div.classList.add('hidden');
 
     var setGame = setInterval(function() {
 
@@ -22,6 +23,10 @@ function generateGame() {
             createCard('crupier');
             clearInterval(setGame);
             canHit = true;
+
+            if (p1Points == 21) {
+                console.log('p1 blackjack');
+            }
         }
 
         count++;
@@ -44,23 +49,18 @@ function createCard(type) {
 
     let new_card = generateCard();
     let main_container = document.createElement('div');
-    // let second_container = document.createElement('div');
     let front = document.createElement('div');
     let front_img = document.createElement('img');
     let back = document.createElement('div');
     let back_img = document.createElement('img');
 
     main_container.classList.add('flip-card');
-    // second_container.classList.add('flip-card-inner');
     front.classList.add('flip-card-front');
     front_img.src = "https://images.freeimages.com/images/premium/previews/1760/17608565-playing-card-back-side-62x90-mm.jpg";
     back.classList.add('flip-card-back');
     back_img.src = "img/deck/" + new_card.card;
 
     deck_div.appendChild(main_container);
-    // main_container.appendChild(second_container);
-    // second_container.appendChild(front);
-    // second_container.appendChild(back);
     main_container.appendChild(front);
     main_container.appendChild(back);
     front.appendChild(front_img);
@@ -206,10 +206,14 @@ var start_div = document.getElementById('start');
 var deck_div = document.getElementById('deck');
 var buttons_div = document.getElementById('buttons');
 var score_div = document.getElementById('score');
+var modal_container_div = document.getElementById('modal-container');
+var modal_div = document.getElementById('modal');
 var crupierscore = document.getElementById('crupierscore');
 var p1score = document.getElementById('p1score');
 var winner = document.getElementById('winner');
 var play = document.getElementById('play');
+var showRules = document.getElementById('showRules');
+var closeRules = document.getElementById('closeRules');
 var hitButton = document.getElementById('hit');
 var standButton = document.getElementById('stand');
 var crupier_bj_button = document.getElementById('bj');
@@ -241,6 +245,19 @@ standButton.addEventListener('click', () => {
         }, 1000);
     }
     
+})
+
+showRules.addEventListener('click', () => {
+    modal_div.classList.add('showModal');
+    modal_div.classList.remove('closeModal');
+    closeRules.classList.remove('hidden');
+    modal_container_div.classList.add('modal-container-color');
+})
+
+closeRules.addEventListener('click', () => {
+    modal_div.classList.add('closeModal');
+    modal_div.classList.remove('addModal');
+    modal_container_div.classList.remove('modal-container-color');
 })
 
 play.addEventListener('click', () => {
