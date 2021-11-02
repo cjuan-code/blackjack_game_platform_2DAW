@@ -202,12 +202,13 @@ var deck = [
 
 var crupier_deck = [];
 var p1_deck = [];
-var start_div = document.getElementById('start');
+var start_div = document.getElementById('start-container');
 var deck_div = document.getElementById('deck');
 var buttons_div = document.getElementById('buttons');
 var score_div = document.getElementById('score');
 var modal_container_div = document.getElementById('modal-container');
 var modal_div = document.getElementById('modal');
+var chips_div = document.getElementById('chips');
 var crupierscore = document.getElementById('crupierscore');
 var p1score = document.getElementById('p1score');
 var winner = document.getElementById('winner');
@@ -217,6 +218,7 @@ var closeRules = document.getElementById('closeRules');
 var hitButton = document.getElementById('hit');
 var standButton = document.getElementById('stand');
 var crupier_bj_button = document.getElementById('bj');
+var bet = document.getElementById('bet');
 var crupierPoints = 0;
 var p1Points = 0;
 var tXp1 = 425;
@@ -248,16 +250,31 @@ standButton.addEventListener('click', () => {
 })
 
 showRules.addEventListener('click', () => {
+    modal_div.classList.remove('hidden');
     modal_div.classList.add('showModal');
     modal_div.classList.remove('closeModal');
     closeRules.classList.remove('hidden');
+    start_div.classList.add('hidden');
     modal_container_div.classList.add('modal-container-color');
 })
 
 closeRules.addEventListener('click', () => {
     modal_div.classList.add('closeModal');
     modal_div.classList.remove('addModal');
-    modal_container_div.classList.remove('modal-container-color');
+    closeRules.classList.add('hidden');
+    setTimeout(() => {
+        start_div.classList.remove('hidden');
+        modal_container_div.classList.remove('modal-container-color');
+        modal_div.classList.add('hidden');
+    }, 650);
+})
+
+chips_div.addEventListener('click', e => {
+    let getval = e.target.src.split('/');
+    let getval2 = getval[6].split('.');
+    let value = Number(getval2[0]);
+    
+    bet.value = Number(bet.value) + value;
 })
 
 play.addEventListener('click', () => {
