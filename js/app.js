@@ -25,7 +25,7 @@ function generateGame() {
             canHit = true;
 
             if (p1Points == 21) {
-                console.log('p1 blackjack');
+                pBlackjack();
             }
         }
 
@@ -56,9 +56,9 @@ function createCard(type) {
 
     main_container.classList.add('flip-card');
     front.classList.add('flip-card-front');
-    front_img.src = "https://images.freeimages.com/images/premium/previews/1760/17608565-playing-card-back-side-62x90-mm.jpg";
+    front_img.src = "media/img/backsite_card.jpg";
     back.classList.add('flip-card-back');
-    back_img.src = "img/deck/" + new_card.card;
+    back_img.src = "media/img/deck/" + new_card.card;
 
     deck_div.appendChild(main_container);
     main_container.appendChild(front);
@@ -179,17 +179,33 @@ function whoWins() {
 
     if (crupierPoints > 21 && p1Points <= 21) {
         winner.innerText = "Player wins";
+        winnings = Number(bet.value) + Number(Number(bet.value)*1);
     } else if (p1Points > 21 && crupierPoints <= 21) {
         winner.innerText = "Crupier wins";
+        winnings = -Number(bet.value);
     } else if (crupierPoints > 21 && crupierPoints > 21) {
         winner.innerText = "Tie";
+        winnings = 0;
     } else if (crupierPoints > p1Points) {
         winner.innerText = "Crupier wins";
+        winnings = -Number(bet.value);
     } else if (crupierPoints < p1Points) {
         winner.innerText = "Player wins";
+        winnings = Number(bet.value) + Number(Number(bet.value)*1);
     } else if (crupierPoints == p1Points) {
         winner.innerText = "Tie";
+        winnings = 0;
     }
+}
+
+function pBlackjack() {
+    winnings = Number(bet.value) + Number(Number(bet.value)*1.5);
+    setTimeout(() => {
+        let elem = document.getElementById('downC');
+        elem.classList.add('flipCrupierUnder');
+        calculatePoints('crupier');
+        winner.innerText = "Player's Blackjack!!";
+    }, 1500);
 }
 
 
@@ -227,6 +243,7 @@ var count = 0;
 var count_values = 0;
 var crupierCountAs = 0;
 var p1CountAs = 0;
+var winnings = 0;
 var canHit = false;
 var p1HasAs = false;
 var crupierHasAs = false;
@@ -271,12 +288,16 @@ closeRules.addEventListener('click', () => {
 
 chips_div.addEventListener('click', e => {
     let getval = e.target.src.split('/');
-    let getval2 = getval[6].split('.');
+    let getval2 = getval[7].split('.');
     let value = Number(getval2[0]);
     
     bet.value = Number(bet.value) + value;
 })
 
 play.addEventListener('click', () => {
-    generateGame();
+    if (Number(bet.value) > 0) {
+        generateGame();
+    } else {
+        alert('You must bet!!!');
+    }
 })
