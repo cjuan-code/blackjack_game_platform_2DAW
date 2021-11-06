@@ -492,14 +492,20 @@ html, body {
     -webkit-animation: fallCoin 0.7s linear;
     -moz-animation: fallCoin 0.7s linear;
     animation-fill-mode: forwards;
+    -webkit-animation-fill-mode: forwards;
+    -moz-animation-fill-mode: forwards;
 }
 
 @keyframes fallCoin {
     0% {
         transform: translateY(0) translateX(0);
+        -webkit-transform: translateY(0) translateX(0);
+        -moz-transform: translateY(0) translateX(0);
     }
 
     100% {
         transform: translateY(1000%) translateX(var(--tXcoin));
+        -webkit-transform: translateY(0) translateX(0);
+        -moz-transform: translateY(0) translateX(0);
     }
 }
