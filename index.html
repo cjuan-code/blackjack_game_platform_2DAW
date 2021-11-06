@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="icon" href="img/favicon.jpg" type="image/x-icon">
+    <link rel="icon" href="media/img/favicon.jpg" type="image/x-icon">
     <link rel="stylesheet" href="css/styles.css"/>
     <title>Blackjack</title>
 </head>
@@ -79,6 +79,7 @@
     </div>
 
     <main id="gameboard" class="gameboard">
+        <div id="coinContainer"></div>
         <div id="deck" class="hidden">
             <img id="deck2_img" src="media/img/backsite_card.jpg" alt="#">
         </div>
@@ -99,6 +100,9 @@
         <button id="stand">Stand</button>
         <button id="bj" class="hidden">Blackjack</button>
     </div>
+    <audio id="fallingCoins">
+      <source src="media/mp3/falling_coins.mp3"/>
+    </audio>
     <script src="js/app.js"></script>
 </body>
 </html>

@@ -11,6 +11,7 @@ html, body {
     height: 100%;
     width: 100%;
     background-image: url(../media/img/wood_texture.jpg);
+    overflow: hidden;
 }
 
 /* Hidden Class */
@@ -258,12 +259,71 @@ html, body {
     width: 100%;
     height: 100%;
 }
+/* Coins CSS */
+#coinContainer {
+    width: 100%;
+    position: absolute;
+    top: 0;
+}
+
+.coin {
+    background: rgb(255,192,1);
+    background: linear-gradient(143deg, rgba(255,192,1,1) 0%, rgba(255,217,0,1) 48%, rgba(204,153,0,1) 100%);
+    width: 10vh;
+    height: 10vh;
+    display: block;
+    position: relative;
+    clip-path: circle(50% at 50% 50%);
+    font-family: 'Source Sans Pro', sans-serif;
+    margin:auto;
+    cursor: pointer;
+    position: absolute;
+    left: var(--left);
+    z-index: 2;
+    transform-style: preserve-3d;
+}
+.coin .borderext {
+    width: 10vh;
+    height: 10vh;
+    border:solid 3px #c79600;
+    border-radius: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 2px;
+}
+.coin .borderint {
+    width: 8vh;
+    height: 8vh;
+    border:solid 1px #c79600;
+    border-radius: 100%;
+    display: block;
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 9px;
+    text-align: center;
+    font-size: 40px;
+}
+.coin .number {
+    position: absolute;
+    left: 0;
+    right: 0;
+    margin: auto;
+    top: 1.3vh;
+    width: 30%;
+    font-size: 6.9vh;
+    color: #927008;
+}
 
 /* Animations */
 .drawPlayer1 {
     animation: drawPlayer1 1s ease-in;
     animation-fill-mode: forwards;
-    -webkit-animation: drawPlayer1 1s ease-in;
+    -webkit-animation: drawPlayer1 1s ease-out;
     -webkit-animation-fill-mode: forwards;
     -moz-animation: drawPlayer1 1s ease-in;
     -moz-animation-fill-mode: forwards;
@@ -428,7 +488,18 @@ html, body {
 }
 
 .fallCoin {
-    animation: closeModal 0.5s ease-in;
-    -webkit-animation: closeModal 0.5s ease-in;
-    -moz-animation: closeModal 0.5s ease-in;
+    animation: fallCoin 0.7s linear;
+    -webkit-animation: fallCoin 0.7s linear;
+    -moz-animation: fallCoin 0.7s linear;
+    animation-fill-mode: forwards;
+}
+
+@keyframes fallCoin {
+    0% {
+        transform: translateY(0) translateX(0);
+    }
+
+    100% {
+        transform: translateY(1000%) translateX(var(--tXcoin));
+    }
 }

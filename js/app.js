@@ -180,6 +180,7 @@ function whoWins() {
     if (crupierPoints > 21 && p1Points <= 21) {
         winner.innerText = "Player wins";
         winnings = Number(bet.value) + Number(Number(bet.value)*1);
+        generateCoins();   
     } else if (p1Points > 21 && crupierPoints <= 21) {
         winner.innerText = "Crupier wins";
         winnings = -Number(bet.value);
@@ -192,6 +193,7 @@ function whoWins() {
     } else if (crupierPoints < p1Points) {
         winner.innerText = "Player wins";
         winnings = Number(bet.value) + Number(Number(bet.value)*1);
+        generateCoins();;
     } else if (crupierPoints == p1Points) {
         winner.innerText = "Tie";
         winnings = 0;
@@ -200,14 +202,53 @@ function whoWins() {
 
 function pBlackjack() {
     winnings = Number(bet.value) + Number(Number(bet.value)*1.5);
+    canHit = false;
     setTimeout(() => {
         let elem = document.getElementById('downC');
         elem.classList.add('flipCrupierUnder');
+        standed = true;
         calculatePoints('crupier');
         winner.innerText = "Player's Blackjack!!";
+        generateCoins();
     }, 1500);
 }
 
+function generateCoins() {
+
+    let initial_time = new Date().getSeconds();
+
+    fallingCoins.play();    
+
+    let interval = setInterval( () => {
+
+        let main = document.createElement('div');
+        let ext_border = document.createElement('div');
+        let int_border = document.createElement('div');
+        let dolar = document.createElement('div');
+
+        main.classList.add('coin');
+        ext_border.classList.add('borderext');
+        int_border.classList.add('borderint');
+        dolar.classList.add('number');
+
+        let rand = Math.random() * innerWidth;
+        main.style.setProperty('--left', rand + 'px');
+
+        coinContainer.appendChild(main);
+        main.appendChild(ext_border);
+        main.appendChild(int_border);
+        main.appendChild(dolar);
+        dolar.appendChild(document.createTextNode('$'));
+
+        rand = Math.ceil(Math.random() * ((500-1) - (-500)) + (-500));
+        main.style.setProperty('--tXcoin', rand + "%");
+        main.classList.add('fallCoin');
+
+        if (new Date().getSeconds() >= (initial_time+2.8)) {
+           clearInterval(interval);
+        }
+    }, 10);
+}
 
 var deck = [
     {card: "clubs/AC.png", value: 11, type: 'AS'}, {card: "clubs/2C.png", value: 2}, {card: "clubs/3C.png", value: 3}, {card: "clubs/4C.png", value: 4}, {card: "clubs/5C.png", value: 5}, {card: "clubs/6C.png", value: 6}, {card: "clubs/7C.png", value: 7}, {card: "clubs/8C.png", value: 8}, {card: "clubs/9C.png", value: 9}, {card: "clubs/0C.png", value: 10}, {card: "clubs/JC.png", value: 10}, {card: "clubs/QC.png", value: 10}, {card: "clubs/KC.png", value: 10},
@@ -218,6 +259,7 @@ var deck = [
 
 var crupier_deck = [];
 var p1_deck = [];
+var coinContainer = document.getElementById('coinContainer');
 var start_div = document.getElementById('start-container');
 var deck_div = document.getElementById('deck');
 var buttons_div = document.getElementById('buttons');
@@ -225,6 +267,7 @@ var score_div = document.getElementById('score');
 var modal_container_div = document.getElementById('modal-container');
 var modal_div = document.getElementById('modal');
 var chips_div = document.getElementById('chips');
+var fallingCoins = document.getElementById('fallingCoins');
 var crupierscore = document.getElementById('crupierscore');
 var p1score = document.getElementById('p1score');
 var winner = document.getElementById('winner');
