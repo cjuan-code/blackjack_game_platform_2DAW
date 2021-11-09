@@ -12,11 +12,6 @@ function generateGame() {
             createCard('p1');
         } else if (count == 1) {
             createCard('crupier');
-
-            if (crupier_deck[0].type == 'AS') {
-                crupier_bj_button.classList.remove('hidden');
-            }
-
         } else if (count == 2) {
             createCard('p1');
         } else if (count == 3) {
@@ -179,20 +174,20 @@ function whoWins() {
 
     if (crupierPoints > 21 && p1Points <= 21) {
         winner.innerText = "Player wins";
-        winnings = Number(bet.value) + Number(Number(bet.value)*1);
+        winnings = Number(bet.innerText) + Number(Number(bet.innerText)*1);
         generateCoins();   
     } else if (p1Points > 21 && crupierPoints <= 21) {
         winner.innerText = "Crupier wins";
-        winnings = -Number(bet.value);
+        winnings = -Number(bet.innerText);
     } else if (crupierPoints > 21 && crupierPoints > 21) {
         winner.innerText = "Tie";
         winnings = 0;
     } else if (crupierPoints > p1Points) {
         winner.innerText = "Crupier wins";
-        winnings = -Number(bet.value);
+        winnings = -Number(bet.innerText);
     } else if (crupierPoints < p1Points) {
         winner.innerText = "Player wins";
-        winnings = Number(bet.value) + Number(Number(bet.value)*1);
+        winnings = Number(bet.innerText) + Number(Number(bet.innerText)*1);
         generateCoins();;
     } else if (crupierPoints == p1Points) {
         winner.innerText = "Tie";
@@ -201,7 +196,7 @@ function whoWins() {
 }
 
 function pBlackjack() {
-    winnings = Number(bet.value) + Number(Number(bet.value)*1.5);
+    winnings = Number(bet.innerText) + Number(Number(bet.innerText)*1.5);
     canHit = false;
     setTimeout(() => {
         let elem = document.getElementById('downC');
@@ -276,7 +271,6 @@ var showRules = document.getElementById('showRules');
 var closeRules = document.getElementById('closeRules');
 var hitButton = document.getElementById('hit');
 var standButton = document.getElementById('stand');
-var crupier_bj_button = document.getElementById('bj');
 var bet = document.getElementById('bet');
 var crupierPoints = 0;
 var p1Points = 0;
@@ -334,11 +328,11 @@ chips_div.addEventListener('click', e => {
     let getval2 = getval[7].split('.');
     let value = Number(getval2[0]);
     
-    bet.value = Number(bet.value) + value;
+    bet.innerText = Number(bet.innerText) + value;
 })
 
 play.addEventListener('click', () => {
-    if (Number(bet.value) > 0) {
+    if (Number(bet.innerText) > 0) {
         generateGame();
     } else {
         alert('You must bet!!!');

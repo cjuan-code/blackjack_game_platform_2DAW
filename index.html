@@ -20,16 +20,13 @@
                 <ul>
                     <li><strong>Bet round</strong>: in this round, player bets an amount of coins.</li>
                     <li>
-                        <strong>Dealing round</strong>: in this round, cards are dealed. Player gets 2 cards which are visible, crupier gets 2 cards too, but the second one is not visible. There can be different situations: 
+                        <strong>Dealing round</strong>: in this round, cards are dealed. Player gets 2 cards which are visible, crupier gets 2 cards too, but the second one is not visible.
+                    </li>
+                    <li>
+                        <strong>Playing round</strong>: in this round, player can:
                         <ul>
-                            <li>If crupier's first card is an AS, player can bet that crupier has Blackjack, so player can refund an amount of coins that has been bet.</li>
-                            <li>
-                                In case that is not an AS:
-                                <ul>
-                                    <li>Hit: it draws a card to player.</li>
-                                    <li>Stand: if player thinks that has enought points to win, player can stand and pass the turn to crupier.</li>
-                                </ul>
-                            </li>
+                            <li><strong>Hit</strong>: it draws a card to player.</li>
+                            <li><strong>Stand</strong>: if player thinks that has enought points to win, player can stand and pass the turn to crupier.</li>
                         </ul>
                     </li>
                 </ul>
@@ -65,15 +62,18 @@
         <div id="start" class="start">
             <h1>Blackjack</h1>
             <hr/>
-            <button id="play">PLAY</button>
-            <button id="showRules">RULES</button>
-            <input id="bet" type="number" min="1"/>
+            <h2>Bet quantity</h2>
+            <h3 id="bet">0</h3>
             <div id="chips" class="betcoins">
                 <img id="5" src="media/img/chips/5.png"/>  
                 <img id="10" src="media/img/chips/10.png"/>  
                 <img id="25" src="media/img/chips/25.png"/>  
                 <img id="50" src="media/img/chips/50.png"/>  
                 <img id="100" src="media/img/chips/100.png"/>  
+            </div>
+            <div class="start_buttons_containers">
+                <button id="play">PLAY</button>
+                <button id="showRules">RULES</button>
             </div>
         </div>
     </div>
@@ -98,7 +98,6 @@
     <div id="buttons" class="hidden">
         <button id="hit">Hit</button>
         <button id="stand">Stand</button>
-        <button id="bj" class="hidden">Blackjack</button>
     </div>
     <audio id="fallingCoins">
       <source src="media/mp3/falling_coins.mp3"/>
