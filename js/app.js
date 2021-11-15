@@ -1,3 +1,33 @@
+var user = {
+    points: 1000
+}
+
+function send_score() {
+    var token = localStorage.getItem("token");
+    if (token) {
+        var http = new XMLHttpRequest();
+        var url = 'http://0.0.0.0:4000/api/rank/update';
+        var params = JSON.stringify({
+            nameGame: "blackjack",
+            score: winnings
+        });
+
+        http.open('POST', url, true);
+
+        // Send the proper header information along with the request
+        http.setRequestHeader('Content-type', 'application/x-www-form-urlencoded');
+        http.setRequestHeader('Authorization', 'Token ' + token);
+
+        http.onreadystatechange = function() { // Call a function when the state changes.
+            if (http.readyState == 4 && http.status == 200) {
+                console.log(http.responseText);
+            }
+        }
+
+        http.send(params);
+    }
+}
+
 function generateGame() {
 
     start_div.classList.add('hidden');
@@ -174,29 +204,35 @@ function whoWins() {
 
     if (crupierPoints > 21 && p1Points <= 21) {
         winner.innerText = "Player wins";
-        winnings = Number(bet.innerText) + Number(Number(bet.innerText)*1);
-        generateCoins();   
+        winnings = user.points + (betAmmount + (betAmmount*1));
+        generateCoins();
+        send_score();
     } else if (p1Points > 21 && crupierPoints <= 21) {
         winner.innerText = "Crupier wins";
-        winnings = -Number(bet.innerText);
+        winnings = user.points - betAmmount;
+        send_score();
     } else if (crupierPoints > 21 && crupierPoints > 21) {
         winner.innerText = "Tie";
-        winnings = 0;
+        winnings = user.points;
+        send_score();
     } else if (crupierPoints > p1Points) {
         winner.innerText = "Crupier wins";
-        winnings = -Number(bet.innerText);
+        winnings = user.points - betAmmount;
+        send_score();
     } else if (crupierPoints < p1Points) {
         winner.innerText = "Player wins";
-        winnings = Number(bet.innerText) + Number(Number(bet.innerText)*1);
-        generateCoins();;
+        winnings = user.points + (betAmmount + (betAmmount*1));
+        generateCoins();
+        send_score();
     } else if (crupierPoints == p1Points) {
         winner.innerText = "Tie";
-        winnings = 0;
+        winnings = user.points;
+        send_score();
     }
 }
 
 function pBlackjack() {
-    winnings = Number(bet.innerText) + Number(Number(bet.innerText)*1.5);
+    winnings = user.points + (betAmmount + (betAmmount*1.5));
     canHit = false;
     setTimeout(() => {
         let elem = document.getElementById('downC');
@@ -205,6 +241,7 @@ function pBlackjack() {
         calculatePoints('crupier');
         winner.innerText = "Player's Blackjack!!";
         generateCoins();
+        send_score();
     }, 1500);
 }
 
@@ -212,7 +249,7 @@ function generateCoins() {
 
     let initial_time = new Date().getSeconds();
 
-    fallingCoins.play();    
+    fallingCoins.play();
 
     let interval = setInterval( () => {
 
@@ -281,6 +318,7 @@ var count_values = 0;
 var crupierCountAs = 0;
 var p1CountAs = 0;
 var winnings = 0;
+var betAmmount = 0;
 var canHit = false;
 var p1HasAs = false;
 var crupierHasAs = false;
@@ -293,14 +331,12 @@ hitButton.addEventListener('click', () => {
 })
 
 standButton.addEventListener('click', () => {
-
     if (canHit) {
         canHit = false;
         setTimeout(() => {
             stand();
         }, 1000);
     }
-    
 })
 
 showRules.addEventListener('click', () => {
@@ -332,9 +368,13 @@ chips_div.addEventListener('click', e => {
 })
 
 play.addEventListener('click', () => {
-    if (Number(bet.innerText) > 0) {
+    if (Number(bet.innerText) > 0 && (Number(bet.innerText) <= (user.points*0.9))) {
+        betAmmount = Number(bet.innerText);
         generateGame();
-    } else {
+    } else if (Number(bet.innerText) == 0) {
         alert('You must bet!!!');
+    } else if (Number(bet.innerText) > (user.points*0.9)) {
+        alert('You can only bet 90% of your points!!!');
+        bet.innerText = 0;
     }
 })
