@@ -1,5 +1,32 @@
-var user = {
-    points: 1000
+async function get_score() {
+
+    var token = localStorage.getItem("token");
+
+    if (token) {
+        const url_server_userScore ='http://0.0.0.0:4000/api/rank/user/score';
+
+        await fetch(url_server_userScore,{
+
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'Authorization': 'Token ' + token
+            },
+            cache: 'no-cache'
+            
+        }).then(function(response) {
+            return response.json();
+        
+        }).then(function(data) {
+            console.log(data);
+            user = {
+                points: data.totalScore
+            }
+        }).catch(function(err) {
+            console.error(err);
+        });
+    }
+    
 }
 
 function send_score() {
@@ -323,6 +350,7 @@ var canHit = false;
 var p1HasAs = false;
 var crupierHasAs = false;
 var standed = false;
+var user = {};
 
 hitButton.addEventListener('click', () => {
     if (canHit) {
@@ -378,3 +406,7 @@ play.addEventListener('click', () => {
         bet.innerText = 0;
     }
 })
+
+window.onload = () => {
+   get_score() ;
+};
