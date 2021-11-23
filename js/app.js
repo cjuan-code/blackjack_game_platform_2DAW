@@ -350,7 +350,7 @@ var canHit = false;
 var p1HasAs = false;
 var crupierHasAs = false;
 var standed = false;
-var user = {points: 1000};
+var user = {};
 
 hitButton.addEventListener('click', () => {
     if (canHit) {
