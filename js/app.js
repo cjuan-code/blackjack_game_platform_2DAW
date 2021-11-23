@@ -350,7 +350,7 @@ var canHit = false;
 var p1HasAs = false;
 var crupierHasAs = false;
 var standed = false;
-var user = {};
+var user = {points: 1000};
 
 hitButton.addEventListener('click', () => {
     if (canHit) {
@@ -389,8 +389,9 @@ closeRules.addEventListener('click', () => {
 
 chips_div.addEventListener('click', e => {
     let getval = e.target.src.split('/');
-    let getval2 = getval[7].split('.');
-    let value = Number(getval2[0]);
+    let getval2 = getval[getval.length - 1];
+    let getval3 = getval2.split('.');
+    let value = Number(getval3[0]);
     
     bet.innerText = Number(bet.innerText) + value;
 })
